@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conversion>
+  <applied-converters>
+    <converter id="android-module-to-java-module" />
+    <converter id="android-proguard-options" />
+    <converter id="android-sdk-library" />
+    <converter id="junit-to-android-junit-configurations" />
+    <converter id="kotlin-non-jvm-source-roots" />
+  </applied-converters>
+  <project-files>
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/codeStyles/codeStyleConfig.xml" timestamp="1575012523228" />
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/compiler.xml" timestamp="1577431060930" />
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/inspectionProfiles/Project_Default.xml" timestamp="1574818777474" />
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/misc.xml" timestamp="1577342619483" />
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/vcs.xml" timestamp="1574823246282" />
+    <file path="/Users/tanoak/work_space/java/tempProject/tserver/.idea/workspace.xml" timestamp="1577344103355" />
+  </project-files>
+</conversion>
+

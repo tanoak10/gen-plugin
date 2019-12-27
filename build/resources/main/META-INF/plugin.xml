@@ -1,0 +1,20 @@
+<idea-plugin>
+  <version>1.0-SNAPSHOT</version>
+  <change-notes>
+      Add change notes here.&lt;br&gt;
+      &lt;em&gt;most HTML tags may be used&lt;/em&gt;</change-notes>
+  <idea-version since-build="192.6817" until-build="192.*"/>
+  <id>gen-plugin</id>
+  <name> auto code generator</name>
+  <vendor email="tanoak@qq.com" url="http://www.github.com/tanoak10">tanoak</vendor>
+  <description>
+    Enter short description for your plugin here and easy.&lt;br&gt;
+    </description>
+  <extensions defaultExtensionNs="com.intellij"/>
+  <actions>
+    <action id="GenAction" class="com.tanoak.action.GeneratorAction" text="Gen" description="geng auto">
+      <add-to-group group-id="GenerateGroup" anchor="last"/>
+    </action>
+  </actions>
+  <depends>com.intellij.modules.java</depends>
+</idea-plugin>
