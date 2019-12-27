@@ -69,7 +69,7 @@ public class GeneratorAction extends AnAction {
         //显示对话框
         ApplicationManager.getApplication().saveAll();
         VirtualFileManager.getInstance().syncRefresh();
-        Messages.showMessageDialog(e.getProject(), "成功" + path, "成功", null);
+        Messages.showMessageDialog(e.getProject(), "成功", "成功", null);
     }
 
     private static void single(String className, List<ColumnInfo> columnInfoList) {
