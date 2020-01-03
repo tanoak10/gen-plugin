@@ -37,7 +37,7 @@ public class MapperTemplate extends BaseModel {
                 .append(mapperTemplate.getEntityName()).append("ResultMap\"")
                 .append(" type=\"")
                 .append(mapperTemplate.getBasePackageName())
-                .append(mapperTemplate.getDaoPackageName())
+                .append(mapperTemplate.getEntityPackageName())
                 .append(".")
                 .append(mapperTemplate.getClassName()).append("\">\n        ")
                 .append(mapperTemplate.getResultMap()).append("\n")
@@ -52,11 +52,11 @@ public class MapperTemplate extends BaseModel {
                 .append(mapperTemplate.getEntityName()).append("Columns\" />\n")
                 .append("        FROM ").append(mapperTemplate.getTableName()).append("\n")
                 .append("        <where>\n").append("        ").append(mapperTemplate.getTableName())
-                .append(".id = ${Id}\n").append("        </where>\n").append(" </select>\n");
-        mapper.append(" <select id=\"selectList\" resultMap=\"${").append(mapperTemplate.getEntityName())
-                .append("}ResultMap\">\n")
+                .append(".id = #{id}\n").append("        </where>\n").append(" </select>\n");
+        mapper.append(" <select id=\"selectList\" resultMap=\"").append(mapperTemplate.getEntityName())
+                .append("ResultMap\">\n")
                 .append("        SELECT\n").append(
-                "        <include refid=\"${").append(mapperTemplate.getEntityName()).append("}Columns\" />\n")
+                "        <include refid=\"").append(mapperTemplate.getEntityName()).append("Columns\" />\n")
                 .append("        FROM ")
                 .append(mapperTemplate.getTableName()).append("\n")
                 .append(" </select>\n");
@@ -68,16 +68,16 @@ public class MapperTemplate extends BaseModel {
         mapper.append(" <insert id=\"insertBatch\" keyProperty=\"id\" useGeneratedKeys=\"true\">\n")
                 .append("        INSERT INTO ").append(mapperTemplate.getTableName()).append("(\n            ")
                 .append(mapperTemplate.getInsertProperties()).append("\n        )\n        VALUES (\n")
-                .append("        <foreach collection =\"list\" item=\"${").append(mapperTemplate.getEntityName())
-                .append("}\" separator =\",\">").append("\n        (")
-                .append(mapperTemplate.getInsertBatchProperties()).append("}\n        )\n")
+                .append("        <foreach collection =\"list\" item=\"").append(mapperTemplate.getEntityName())
+                .append("\" separator =\",\">").append("\n            (")
+                .append(mapperTemplate.getInsertBatchProperties()).append("\n        )\n")
                 .append("        )\n        </foreach>\n")
                 .append(" </insert>\n");
         //更新
         mapper.append(" <update id=\"updateByPrimaryKey\">\n        UPDATE ").append(mapperTemplate.getTableName())
                 .append(" SET\n")
-                .append("        ${").append(mapperTemplate.getUpdateProperties()).append("}\n")
-                .append("        WHERE id = ${id}\n </update>\n")
+                .append("        ").append(mapperTemplate.getUpdateProperties()).append("\n")
+                .append("        WHERE id = #{id}\n </update>\n")
                 .append("</mapper>");
         return mapper;
     }
