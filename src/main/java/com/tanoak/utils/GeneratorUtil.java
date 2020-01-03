@@ -145,6 +145,10 @@ public class GeneratorUtil {
     public static String generateMapperUpdateProperties(List<ColumnInfo> infos) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < infos.size(); i++) {
+            //id 不可更新
+            if (infos.get(i).getColumnName().equals("id")) {
+                continue;
+            }
             if (i != 0) {
                 sb.append("        ");
             }

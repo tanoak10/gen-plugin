@@ -56,14 +56,9 @@ public class DaoTemplate extends BaseModel {
         dao.append("    int insertBatch(List<")
                 .append(daoTemplate.getClassName()).append("> ").append(daoTemplate.getEntityName()).append("s);\n").append("\n");
         //更新
-        dao.append("    int updateByPrimaryKey(").append(daoTemplate.getPropertyTypeName())
-                .append(" id);\n")
-                .append("\n") ;
-        //删除
-        dao.append("    int deleteByPrimaryKey(").append(daoTemplate.getPropertyTypeName()).append(" id);\n")
-                .append("\n")
-                .append("\n")
-                .append("}");
+        dao.append("    int updateByPrimaryKey(").append(daoTemplate.getClassName())
+                .append(" ").append(daoTemplate.getEntityName()).append(");\n")
+                .append("\n}");
         return dao;
     }
 

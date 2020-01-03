@@ -67,10 +67,10 @@ public class MapperTemplate extends BaseModel {
                 .append("    </insert>\n");
         mapper.append(" <insert id=\"insertBatch\" keyProperty=\"id\" useGeneratedKeys=\"true\">\n")
                 .append("        INSERT INTO ").append(mapperTemplate.getTableName()).append("(\n            ")
-                .append(mapperTemplate.getInsertProperties()).append("\n        )\n        VALUES (\n")
+                .append(mapperTemplate.getInsertProperties()).append("\n        )\n        VALUES \n")
                 .append("        <foreach collection =\"list\" item=\"").append(mapperTemplate.getEntityName())
                 .append("\" separator =\",\">").append("\n            (")
-                .append(mapperTemplate.getInsertBatchProperties()).append("\n        )\n")
+                .append(mapperTemplate.getInsertBatchProperties()).append("\n")
                 .append("        )\n        </foreach>\n")
                 .append(" </insert>\n");
         //更新
