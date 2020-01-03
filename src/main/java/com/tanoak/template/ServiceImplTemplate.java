@@ -31,6 +31,9 @@ public class ServiceImplTemplate extends BaseModel {
                 .append("import ").append(serviceImplTemplate.getBasePackageName())
                 .append(serviceImplTemplate.getEntityPackageName()).append(".")
                 .append(serviceImplTemplate.getClassName()).append(";\n")
+                .append("import ").append(serviceImplTemplate.getBasePackageName())
+                .append("service.").append(serviceImplTemplate.getClassName()).append("Service")
+                .append(";\n")
                 .append("import org.springframework.stereotype.Service;\n")
                 .append("import javax.annotation.Resource;\n")
                 .append("import ")
@@ -49,12 +52,12 @@ public class ServiceImplTemplate extends BaseModel {
                 .append("public class ").append(serviceImplTemplate.getClassName()).append("Service").append(serviceImplTemplate.getImpl()).append("{\n\n");
         service.append("    @Resource\n").append("    ")
                 .append("private ").append(serviceImplTemplate.getClassName()).append("Dao ")
-                .append(serviceImplTemplate.getEntityName()).append("Dao;\n");
+                .append(serviceImplTemplate.getEntityName()).append("Dao;\n\n");
         //单个查询
         service.append("    @Override\n")
                 .append("    public ").append(serviceImplTemplate.getClassName()).append(" findById(")
                 .append(serviceImplTemplate.getPropertyTypeName()).append(" id){\n")
-                .append("return ")
+                .append("    return ")
                 .append(serviceImplTemplate.getEntityName()).append("Dao.")
                 .append("selectByPrimaryKey(id);\n")
                 .append("\n    }\n");

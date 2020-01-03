@@ -13,7 +13,7 @@ public class ConfigUtil {
     private ConfigUtil(){
 
     }
-    public static void initConfig(String author, String packageName,String entity) {
+    public static void initConfig(String author, String packageName,String entity,Boolean isDao) {
         Path path = new Path();
         configuration.setAuthor(author);
         configuration.setPackageName(packageName);
@@ -21,9 +21,18 @@ public class ConfigUtil {
         path.setController("controller");
         path.setService("service");
         path.setServiceImpl("service.impl");
-        path.setDao("dao.mapper");
-        path.setMapper("mapper");
-        path.setEntity(entity);
+        if(isDao){
+            path.setDao("dao.mapper");
+            path.setMapper("dao.mapper");
+            path.setEntity("dao."+entity);
+
+        }else{
+            path.setDao("dao");
+            path.setMapper("dao");
+            path.setEntity(entity);
+        }
+
+
     }
 
     public static Configuration getConfiguration() {

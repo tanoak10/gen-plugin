@@ -27,6 +27,7 @@ public class ServiceTemplate extends BaseModel {
                 .append(";\n")
                 .append("import ").append(serviceTemplate.getBasePackageName())
                 .append(serviceTemplate.getEntityPackageName())
+                .append(".")
                 .append(serviceTemplate.getClassName())
                 .append(";\nimport java.util.List;\n" + "\n" + "/**\n")
                 .append(" * @author ")

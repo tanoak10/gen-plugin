@@ -1,7 +1,9 @@
 package com.tanoak.task;
 
+import cn.hutool.core.date.DateUtil;
 import com.tanoak.entity.ColumnInfo;
 import com.tanoak.task.base.AbstractTask;
+import com.tanoak.template.MapperTemplate;
 import com.tanoak.utils.ConfigUtil;
 import com.tanoak.utils.FileUtils;
 import com.tanoak.utils.GeneratorUtil;
@@ -30,38 +32,25 @@ public class MapperTask extends AbstractTask {
     public void run() {
         // 生成Mapper填充数据
         System.out.println("Generating " + className + "Mapper.xml");
-        Map<String, String> mapperData = new HashMap<>();
-        mapperData.put("PackageName", ConfigUtil.getConfiguration().getPackageName() + "." + ConfigUtil.getConfiguration().getPath().getDao());
-        mapperData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
-        mapperData.put("DaoPackageName", ConfigUtil.getConfiguration().getPath().getDao());
-        mapperData.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
-        mapperData.put("ClassName", className);
-        mapperData.put("EntityName", StringUtil.firstToLowerCase(className));
-        mapperData.put("TableName", tableName);
-        mapperData.put("InsertProperties", GeneratorUtil.generateMapperInsertProperties(columnInfoList));
-        mapperData.put("PrimaryKey", getPrimaryKeyColumnInfo(columnInfoList).getColumnName());
-        mapperData.put("WhereId", "#{" + getPrimaryKeyColumnInfo(columnInfoList).getPropertyName() + "}");
-        mapperData.put("Id", "#{id}");
-        // 单表
-        mapperData.put("ColumnMap", GeneratorUtil.generateMapperColumnMap(tableName, columnInfoList));
-        mapperData.put("ResultMap", GeneratorUtil.generateMapperResultMap(columnInfoList));
-        mapperData.put("InsertBatchValues", GeneratorUtil.generateMapperInsertBatchValues(columnInfoList, StringUtil.firstToLowerCase(className)));
-        mapperData.put("InsertValues", GeneratorUtil.generateMapperInsertValues(columnInfoList));
-        mapperData.put("UpdateProperties", GeneratorUtil.generateMapperUpdateProperties(columnInfoList));
+        ColumnInfo columnInfo = columnInfoList.stream().filter(info -> info.getPropertyName().equalsIgnoreCase("id")).findFirst().get();
+        MapperTemplate mapperTemplate = new MapperTemplate();
+        mapperTemplate.setDaoPackageName(ConfigUtil.getConfiguration().getPath().getDao());
+        mapperTemplate.setClassName(className);
+        mapperTemplate.setPropertyTypeName(columnInfo.getType());
+        mapperTemplate.setEntityName(StringUtil.firstToLowerCase(className));
+        mapperTemplate.setResultMap(GeneratorUtil.generateMapperResultMap(columnInfoList));
+        mapperTemplate.setColumnMap(GeneratorUtil.generateMapperColumnMap(tableName, columnInfoList));
+        mapperTemplate.setTableName(tableName);
+        mapperTemplate.setInsertProperties(GeneratorUtil.generateMapperInsertProperties(columnInfoList));
+        mapperTemplate.setInsertBatchProperties(GeneratorUtil.generateMapperInsertBatchValues(columnInfoList, StringUtil.firstToLowerCase(className)));
+        mapperTemplate.setInsertValues(GeneratorUtil.generateMapperInsertValues(columnInfoList));
+        mapperTemplate.setUpdateProperties(GeneratorUtil.generateMapperUpdateProperties(columnInfoList));
+        mapperTemplate.setBasePackageName(ConfigUtil.getConfiguration().getPackageName());
+        mapperTemplate.setDate(DateUtil.now());
+        mapperTemplate.setEntityPackageName(ConfigUtil.getConfiguration().getPath().getEntity());
         String filePath = FileUtils.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getDao());
         String fileName = className + "Mapper.xml";
-
         // 生成Mapper文件
-//        FileUtils.generateToJava( mapperData, filePath + fileName);
+        FileUtils.generateToJava(mapperTemplate.build(mapperTemplate), filePath + fileName);
     }
-
-    private ColumnInfo getPrimaryKeyColumnInfo(List<ColumnInfo> list) {
-        for (ColumnInfo columnInfo : list) {
-            if (columnInfo.isPrimaryKey()) {
-                return columnInfo;
-            }
-        }
-        return null;
-    }
-
 }
