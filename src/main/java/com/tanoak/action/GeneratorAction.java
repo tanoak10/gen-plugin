@@ -58,12 +58,8 @@ public class GeneratorAction extends AnAction {
         String[] plist = StrUtil.split(psiJavaFile.getPackageName(), ".");
 
         ConfigUtil.initConfig("tanoak", getBasePackage(plist), plist[plist.length - 1], checkDao(plist));
-        try {
-            WriteCommandAction.runWriteCommandAction(e.getProject(),
-                    () -> single(StrUtil.removeAll(psiJavaFile.getName(), ".java"), columnInfoList));
-        } catch (FileException fe) {
-            Messages.showErrorDialog("生成失败，有文件已存在", "警告");
-        }
+        WriteCommandAction.runWriteCommandAction(e.getProject(),
+                () -> single(StrUtil.removeAll(psiJavaFile.getName(), ".java"), columnInfoList));
         //显示对话框
         ApplicationManager.getApplication().saveAll();
         VirtualFileManager.getInstance().syncRefresh();
@@ -125,13 +121,22 @@ public class GeneratorAction extends AnAction {
         return File.separator + moduleName;
     }
 
+    /**
+     * 生成文件入口
+     *
+     * @param className      类名
+     * @param columnInfoList 列信息列表
+     */
     private static void single(String className, List<ColumnInfo> columnInfoList) {
-
-        Invoker invoker = new SingleInvoker.Builder()
-                .setTableName(StrUtil.toUnderlineCase(className))
-                .setClassName(className)
-                .build();
-        invoker.execute(columnInfoList);
+        try {
+            Invoker invoker = new SingleInvoker.Builder()
+                    .setTableName(StrUtil.toUnderlineCase(className))
+                    .setClassName(className)
+                    .build();
+            invoker.execute(columnInfoList);
+        } catch (FileException fe) {
+            Messages.showErrorDialog("生成失败，有文件已存在", "警告");
+        }
     }
 
 }
