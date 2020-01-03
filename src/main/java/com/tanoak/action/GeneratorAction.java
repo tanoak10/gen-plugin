@@ -61,13 +61,14 @@ public class GeneratorAction extends AnAction {
         try {
             WriteCommandAction.runWriteCommandAction(e.getProject(),
                     () -> single(StrUtil.removeAll(psiJavaFile.getName(), ".java"), columnInfoList));
-            //显示对话框
-            ApplicationManager.getApplication().saveAll();
-            VirtualFileManager.getInstance().syncRefresh();
-            Messages.showMessageDialog(e.getProject(), "success", "成功", null);
         } catch (FileException fe) {
-            Messages.showErrorDialog("生成失败，有文件已存在", "错误");
+            Messages.showErrorDialog("生成失败，有文件已存在", "警告");
         }
+        //显示对话框
+        ApplicationManager.getApplication().saveAll();
+        VirtualFileManager.getInstance().syncRefresh();
+        Messages.showMessageDialog(e.getProject(), "success", "成功", null);
+
     }
 
     /**
