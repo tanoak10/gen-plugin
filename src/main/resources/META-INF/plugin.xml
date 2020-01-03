@@ -4,7 +4,8 @@
     <vendor email="tanoak@qq.com" url="http://www.github.com/tanoak10">tanoak</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here and easy.<br>
+    这是自动生成Dao 、Service层的代码插件
+        so easy.<br> Enter short description for your plugin here and easy.<br>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -19,7 +20,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="GenAction" class="com.tanoak.action.GeneratorAction" text="Gen" description="geng auto">
+        <action id="GenAction" class="com.tanoak.action.GeneratorAction" text="AutoCode" description="geng auto">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
     </actions>
