@@ -1,7 +1,10 @@
 <idea-plugin>
     <id>gen-plugin</id>
     <name> auto code generator</name>
+
     <vendor email="tanoak@qq.com" url="http://www.github.com/tanoak10">tanoak</vendor>
+
+    <version>1.0.0</version>
 
     <description><![CDATA[
     这是自动生成Dao 、Service层的代码插件
