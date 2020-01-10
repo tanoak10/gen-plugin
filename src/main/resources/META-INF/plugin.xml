@@ -7,9 +7,11 @@
     <version>1.0.0</version>
 
     <description><![CDATA[
+
     这是自动生成Dao 、Service层的代码插件
     Mac 下是 cmd+ N ,win下应该是ctrl+enter
-    ![说明](https://upload-images.jianshu.io/upload_images/9819800-9e245c7fa5d948ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+    <>
+    <img src="https://upload-images.jianshu.io/upload_images/9819800-9e245c7fa5d948ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="说明" title="说明"/>
     就可以生成了，注意，生成的实体需要有id字段
         so easy.<br> Enter short description for your plugin here and easy.<br>
     ]]></description>
